@@ -185,12 +185,13 @@
             </div>
         </section>
         <section class="opacity-0 text-white text-center py-3 font-bold text-xl">
-        🎉 Diskon Terbatas! Pesan Sekarang Sebelum Harga Naik! 🎉
+        🎉 Diskon Terbatas! 🎉<br> 🎉 Pesan Sekarang! 🎉
         </section>
     
     <!-- Countdown Timer -->
     <section class="opacity-0 text-white text-center py-3 font-bold text-xl">
-        ⏳ Promo Berakhir dalam: <span id="countdown"></span> ⏳
+        ⏳ Promo Berakhir dalam: ⏳<br>
+        ⏳ <span id="countdown"></span> ⏳
     </section>
     
     <!-- Paket Bundling -->
@@ -225,7 +226,7 @@
                 let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                document.getElementById("countdown").innerHTML = `${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;
+                document.getElementById("countdown").innerHTML = `${days}h ${hours}j ${minutes}m ${seconds}d`;
                 if (distance < 0) {
                     clearInterval(x);
                     document.getElementById("countdown").innerHTML = "Promo Berakhir!";
