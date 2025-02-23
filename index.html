@@ -33,16 +33,16 @@
         }
 
         .fade-in { opacity: 0; transform: translateY(10px); }
-        .fade-in.active { opacity: 1; transform: translateY(0); transition: all 0.5s ease-in-out; }
+        .fade-in.active { opacity: 1; transform: translateY(0); transition: all 0.8s ease-in-out; }
 
         .rotate-in { opacity: 0; transform: rotate(-10deg); }
-        .rotate-in.active { opacity: 1; transform: rotate(0); transition: all 0.6s ease-in-out; }
+        .rotate-in.active { opacity: 1; transform: rotate(0); transition: all 0.9s ease-in-out; }
 
         .scale-in { opacity: 0; transform: scale(0.8); }
-        .scale-in.active { opacity: 1; transform: scale(1); transition: all 0.6s ease-in-out; }
+        .scale-in.active { opacity: 1; transform: scale(1); transition: all 0.8s ease-in-out; }
 
         .slide-in { opacity: 0; transform: translateX(-20px); }
-        .slide-in.active { opacity: 1; transform: translateX(0); transition: all 0.5s ease-in-out; }
+        .slide-in.active { opacity: 1; transform: translateX(0); transition: all 0.9s ease-in-out; }
 
 
     </style>
@@ -204,10 +204,10 @@
     
     <!-- Tombol WhatsApp -->
     <a id="whatsapp-button" href="https://wa.me/62895370209724?text=Halo,%20saya%20tertarik%20dengan%20jasa%20pembuatan%20website!" 
-    class="fixed bottom-5 right-5 bg-yellow-500 text-black font-bold px-4 py-3 rounded-full shadow-lg flex items-center space-x-2 hover:bg-yellow-600 transition-all">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" class="w-6 h-6">
-    <span>Chat Kami</span>
-</a>
+        class="opacity-0 fixed bottom-5 right-5 bg-yellow-500 text-black font-bold px-4 py-3 rounded-full shadow-lg flex items-center space-x-2 hover:bg-yellow-600 transition-all">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" class="w-6 h-6">
+        <span>Chat Kami</span>
+    </a>
 
 
 <footer id="footer" class="w-full bg-yellow-400 text-black text-center py-4 mt-10 text-sm">
@@ -217,7 +217,7 @@
     
     <script>
         function countdownTimer() {
-            const countDownDate = new Date().getTime() + (3 * 19 * 60 * 60 * 1000); // 3 hari dari sekarang
+            const countDownDate = new Date().getTime() + (4 * 25 * 55 * 60 * 1000); // 3 hari dari sekarang
             const x = setInterval(function() {
                 let now = new Date().getTime();
                 let distance = countDownDate - now;
