@@ -31,6 +31,20 @@
             width: 100%;
             height: 100%;
         }
+
+        .fade-in { opacity: 0; transform: translateY(10px); }
+        .fade-in.active { opacity: 1; transform: translateY(0); transition: all 0.5s ease-in-out; }
+
+        .rotate-in { opacity: 0; transform: rotate(-10deg); }
+        .rotate-in.active { opacity: 1; transform: rotate(0); transition: all 0.6s ease-in-out; }
+
+        .scale-in { opacity: 0; transform: scale(0.8); }
+        .scale-in.active { opacity: 1; transform: scale(1); transition: all 0.6s ease-in-out; }
+
+        .slide-in { opacity: 0; transform: translateX(-20px); }
+        .slide-in.active { opacity: 1; transform: translateX(0); transition: all 0.5s ease-in-out; }
+
+
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center">
@@ -46,8 +60,8 @@
         </p>
     </section>
 
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-8">
-        <div class="bg-cover bg-center text-white p-6 rounded-2xl shadow-lg card transition-transform duration-300" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240401/pngtree-black-gold-background-abstract-geometric-shapes-stock-vector-template-premium-design-image_15699821.jpg');">
+    <div id="package-container" class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 p-8">
+        <div class="opacity-0  bg-cover bg-center text-white p-6 rounded-2xl shadow-lg card transition-transform duration-300" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240401/pngtree-black-gold-background-abstract-geometric-shapes-stock-vector-template-premium-design-image_15699821.jpg');">
             <h2 class="text-2xl text-yellow-300 font-bold">1. Paket Hemat</h2>
             <p class="text-yellow-200">Cocok untuk KP</p>
             <ul class="mt-4 space-y-2 text-yellow-100">
@@ -63,7 +77,7 @@
             <a href="https://wa.me/62895370209724?text=Saya%20tertarik%20dengan%20Paket%20Hemat%20Seharga%20Rp.%201.000.000,-" class="block mt-4 bg-yellow-400 text-black font-bold text-center py-2 rounded-lg border-2 border-black hover:bg-yellow-500 transition-all">Beli Sekarang</a>
         </div>
         
-        <div class="bg-cover bg-center text-white p-6 rounded-2xl shadow-lg card transition-transform duration-300" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240401/pngtree-black-gold-background-abstract-geometric-shapes-stock-vector-template-premium-design-image_15699821.jpg');">
+        <div class="opacity-0  bg-cover bg-center text-white p-6 rounded-2xl shadow-lg card transition-transform duration-300" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240401/pngtree-black-gold-background-abstract-geometric-shapes-stock-vector-template-premium-design-image_15699821.jpg');">
             <h2 class="text-2xl font-bold text-yellow-300">2. Paket Sedang</h2>
             <p class="text-yellow-200">Cocok untuk KP</p>
             <ul class="mt-4 space-y-2 text-yellow-100">
@@ -79,7 +93,7 @@
             <a href="https://wa.me/62895370209724?text=Saya%20tertarik%20dengan%20Paket%20Sedang%20Seharga%20Rp.%201.200.000,-" class="block mt-4 bg-yellow-400 text-black font-bold text-center py-2 rounded-lg border-2 border-black hover:bg-yellow-500 transition-all">Beli Sekarang</a>
         </div>
     
-        <div class="bg-cover bg-center text-white p-6 rounded-2xl shadow-lg card transition-transform duration-300" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240401/pngtree-black-gold-background-abstract-geometric-shapes-stock-vector-template-premium-design-image_15699821.jpg');">
+        <div class="opacity-0  bg-cover bg-center text-white p-6 rounded-2xl shadow-lg card transition-transform duration-300" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240401/pngtree-black-gold-background-abstract-geometric-shapes-stock-vector-template-premium-design-image_15699821.jpg');">
             <h2 class="text-2xl font-bold text-yellow-300">3. Paket Premium</h2>
             <p class="text-yellow-200">Cocok untuk KP & Skripsi</p>
             <ul class="mt-4 space-y-2 text-yellow-100">
@@ -95,7 +109,7 @@
             <a href="https://wa.me/62895370209724?text=Saya%20tertarik%20dengan%20Paket%20Premium%20Seharga%20Rp.%201.700.000,-" class="block mt-4 bg-yellow-400 text-black font-bold text-center py-2 border-2 border-black rounded-lg hover:bg-yellow-500 transition-all">Beli Sekarang</a>
         </div>
         
-        <div class="bg-cover bg-center text-white p-6 rounded-2xl shadow-lg card transition-transform duration-300" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240401/pngtree-black-gold-background-abstract-geometric-shapes-stock-vector-template-premium-design-image_15699821.jpg');">
+        <div class="opacity-0  bg-cover bg-center text-white p-6 rounded-2xl shadow-lg card transition-transform duration-300" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240401/pngtree-black-gold-background-abstract-geometric-shapes-stock-vector-template-premium-design-image_15699821.jpg');">
             <h2 class="text-2xl font-bold text-yellow-300">4. Paket Platinum</h2>
             <p class="text-yellow-200">Cocok untuk KP & Skripsi</p>
             <ul class="mt-4 space-y-2 text-yellow-100">
@@ -115,7 +129,7 @@
         </div>
     </div>
         <!-- Testimoni Pelanggan -->
-        <section class="text-center mt-10 p-6">
+        <section class="opacity-0 text-center mt-10 p-6">
             <h2 class="text-3xl font-bold text-yellow-300">Testimoni Pelanggan</h2>
             <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div class="bg-yellow-100 p-4 rounded-lg text-black shadow-md">
@@ -134,14 +148,14 @@
         </section>
         <!-- Video Promo -->
         <!-- layar laptop -->
-        <section class="text-center mt-10 p-6 hidden sm:block">
+        <section class="opacity-0 text-center mt-10 p-6 hidden sm:block">
             <h2 class="text-3xl font-bold text-yellow-300">Tonton Video Kami</h2>
             <div class="mt-6">
                 <iframe width="560" height="315" src="CreateWebsite.mp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
            </div>
         </section>
         <!-- layar hp -->
-        <section class="text-center mt-10 p-6 md:hidden">
+        <section class="opacity-0 text-center mt-10 p-6 md:hidden">
             <h2 class="text-3xl font-bold text-yellow-300">Tonton Video Kami</h2>
             <div class="video-container mt-6">
                 <iframe src="CreateWebsite.mp4" title="Promo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -149,7 +163,7 @@
         </section>
     
         <!-- FAQ -->
-        <section class="text-center mt-10 p-6">
+        <section class="opacity-0 text-center mt-10 p-6">
             <h2 class="text-3xl font-bold text-yellow-300">Pertanyaan yang Sering Diajukan</h2>
             <div class="mt-6 space-y-4">
                 <details class="bg-yellow-100 p-4 rounded-lg text-black shadow-md">
@@ -164,10 +178,117 @@
                     <summary class="font-bold cursor-pointer">Apakah ada revisi setelah selesai?</summary>
                     <p class="mt-2">Ya, setiap paket memiliki jumlah revisi gratis sesuai ketentuan.</p>
                 </details>
+                <details class="bg-yellow-100 p-4 rounded-lg text-black shadow-md">
+                    <summary class="font-bold cursor-pointer mr-12">Apakah ada pertanyaan lain?</summary>
+                    <p class="mt-2">Silahkan hubungi nomor ini <a href="https://wa.me/62895370209724" class="text-yellow-600 hover:text-yellow-500 ">+62895370209724</a></p>
+                </details>
             </div>
         </section>
-    <footer class="w-full bg-yellow-400 text-black text-center py-4 mt-10 text-sm">
-        &copy; 2025 Jasa Pembuatan Website KP & Skripsi. All Rights Reserved.
-    </footer>
+        <section class="opacity-0 text-white text-center py-3 font-bold text-xl">
+        🎉 Diskon Terbatas! Pesan Sekarang Sebelum Harga Naik! 🎉
+        </section>
+    
+    <!-- Countdown Timer -->
+    <section class="opacity-0 text-white text-center py-3 font-bold text-xl">
+        ⏳ Promo Berakhir dalam: <span id="countdown"></span> ⏳
+    </section>
+    
+    <!-- Paket Bundling -->
+    <section class="opacity-0 text-center mt-10 p-6 bg-yellow-200 text-black rounded-lg shadow-md mx-6">
+        <h2 class="text-2xl font-bold">🔥 Spesial Paket Combo 🔥</h2>
+        <p>Dapatkan <strong>Paket Sedang</strong> + <strong>Paket Domain 1 Tahun</strong> hanya dengan <span class="text-red-600 font-bold">Rp. 1.500.000,-</span> (Hemat Rp. 500.000,-)</p>
+        <a href="https://wa.me/62895370209724?text=Saya%20tertarik%20dengan%20Paket%20Combo%20Seharga%20Rp.%201.500.000,-" class="mt-4 inline-block bg-yellow-500 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-700 transition-all">
+            Pesan Sekarang 🚀
+        </a>
+    </section>
+    
+    <!-- Tombol WhatsApp -->
+    <a id="whatsapp-button" href="https://wa.me/62895370209724?text=Halo,%20saya%20tertarik%20dengan%20jasa%20pembuatan%20website!" 
+    class="fixed bottom-5 right-5 bg-yellow-500 text-black font-bold px-4 py-3 rounded-full shadow-lg flex items-center space-x-2 hover:bg-yellow-600 transition-all">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" class="w-6 h-6">
+    <span>Chat Kami</span>
+</a>
+
+
+<footer id="footer" class="w-full bg-yellow-400 text-black text-center py-4 mt-10 text-sm">
+    &copy; 2025 Jasa Pembuatan Website KP & Skripsi. All Rights Reserved.
+</footer>
+
+    
+    <script>
+        function countdownTimer() {
+            const countDownDate = new Date().getTime() + (3 * 19 * 60 * 60 * 1000); // 3 hari dari sekarang
+            const x = setInterval(function() {
+                let now = new Date().getTime();
+                let distance = countDownDate - now;
+                let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerHTML = `${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown").innerHTML = "Promo Berakhir!";
+                }
+            }, 1000);
+        }
+        countdownTimer();
+        
+        
+    document.addEventListener("DOMContentLoaded", function () {
+        const whatsappButton = document.getElementById("whatsapp-button");
+        const footer = document.getElementById("footer");
+
+        // Buat Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    whatsappButton.style.opacity = "0"; // Sembunyikan tombol
+                    whatsappButton.style.pointerEvents = "none"; // Matikan klik
+                } else {
+                    whatsappButton.style.opacity = "1"; // Munculkan kembali tombol
+                    whatsappButton.style.pointerEvents = "auto"; // Aktifkan klik
+                }
+            });
+        }, { threshold: 0.1 });
+
+        observer.observe(footer); // Observasi footer
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll(".opacity-0");
+    
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains("fade-in")) {
+                    entry.target.classList.add("active");
+                } else if (entry.target.classList.contains("rotate-in")) {
+                    entry.target.classList.add("active");
+                } else if (entry.target.classList.contains("scale-in")) {
+                    entry.target.classList.add("active");
+                } else if (entry.target.classList.contains("slide-in")) {
+                    entry.target.classList.add("active");
+                }
+            }
+        });
+    }, { threshold: 0.2 });
+    
+    sections.forEach((section, index) => {
+        if (index % 4 === 0) {
+            section.classList.add("fade-in");
+        } else if (index % 4 === 1) {
+            section.classList.add("rotate-in");
+        } else if (index % 4 === 2) {
+            section.classList.add("scale-in");
+        } else {
+            section.classList.add("slide-in");
+        }
+        observer.observe(section);
+    });
+});
+    
+    </script>
+    
 </body>
 </html>
