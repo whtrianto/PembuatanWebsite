@@ -192,14 +192,70 @@
             .process-step:nth-child(2)::after { display: none; }
         }
         @media (max-width: 768px) {
-            .nav-links { position: fixed; left: -100%; top: 0; background-color: var(--white-color); width: 100%; height: 100vh; flex-direction: column; justify-content: center; align-items: center; gap: 2rem; transition: left 0.3s ease; }
-            .nav-links.active { left: 0; }
-            .nav-links a { font-size: 1.5rem; }
-            .hamburger { display: block; z-index: 1001; }
-            .hamburger.active .bar:nth-child(2) { opacity: 0; }
-            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); background-color: var(--dark-color); }
-            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background-color: var(--dark-color); }
-            .header .btn-primary { display: none; }
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                background: rgba(255,255,255,0.95);
+                backdrop-filter: blur(10px);
+                width: 85vw;
+                max-width: 340px;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 0;
+                box-shadow: 2px 0 24px rgba(44,62,80,0.12);
+                border-top-right-radius: 24px;
+                border-bottom-right-radius: 24px;
+                padding: 40px 32px 24px 32px;
+                transition: left 0.4s cubic-bezier(.77,0,.18,1);
+                z-index: 1100;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .nav-links li {
+                width: 100%;
+                margin-bottom: 18px;
+            }
+            .nav-links a {
+                font-size: 1.25rem;
+                width: 100%;
+                display: block;
+                padding: 14px 0 14px 8px;
+                border-radius: 8px;
+                color: var(--dark-color);
+                transition: background 0.2s, color 0.2s;
+            }
+            .nav-links a:hover, .nav-links a.active {
+                background: var(--primary-color);
+                color: var(--white-color);
+            }
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.7);
+                box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+                transition: background 0.2s;
+            }
+            .hamburger:hover {
+                background: rgba(255,255,255,1);
+            }
+            .hamburger .bar {
+                width: 28px;
+                height: 3.5px;
+                margin: 4px auto;
+                border-radius: 2px;
+            }
+            .header .btn-primary {
+                display: none;
+            }
             .hero { height: 90vh; }
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1.1rem; }
@@ -247,7 +303,7 @@
 
         <!-- ========== HERO SECTION ========== -->
         <section class="hero" id="hero">
-            <div class="container hero-content fade-in"><br><br>
+            <div class="container hero-content fade-in"><br><br><br>
                 <h1>Partner Profesional untuk Pakan Ternak Anda</h1>
                 <p>Menyediakan solusi pakan terbaik untuk sapi, ayam, kambing, dan ikan. Terpercaya sejak lama untuk mendukung kesuksesan peternak Indonesia.</p>
                 <div class="hero-buttons">
