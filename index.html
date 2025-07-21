@@ -121,12 +121,78 @@
         #produk { background-color: var(--light-bg-color); }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .product-card { background-color: var(--white-color); border-radius: var(--border-radius); box-shadow: var(--shadow-sm); overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; padding-top: 32px; }
-        .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
-        .product-card img { width: 100%; height: 220px; object-fit: cover; }
-        .product-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .product-category { font-size: 0.8rem; font-weight: 700; color: var(--secondary-color); text-transform: uppercase; margin-bottom: 0.5rem; }
-        .product-content h3 { font-size: 1.2rem; margin-bottom: 1rem; }
-        .product-content .btn { margin-top: auto; text-align: center; width: 100%; }
+        .product-card {
+            position: relative;
+            background-color: var(--white-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding-top: 32px;
+        }
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(44,62,80,0.13);
+            border: 2px solid var(--primary-color);
+        }
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            transition: filter 0.3s;
+        }
+        .product-card:hover img {
+            filter: brightness(0.95) saturate(1.2);
+        }
+        .product-badge {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            background: var(--secondary-color);
+            color: var(--white-color);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            z-index: 2;
+            letter-spacing: 1px;
+        }
+        .product-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .product-category {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        .product-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        .product-desc {
+            font-size: 0.98rem;
+            color: #616161;
+            margin-bottom: 1rem;
+            min-height: 38px;
+        }
+        .product-content .btn {
+            margin-top: auto;
+            text-align: center;
+            width: 100%;
+        }
 
         /* === Proses Kami Section === */
         .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
@@ -152,7 +218,6 @@
 
         /* === Artikel Section === */
         #artikel { background-color: var(--light-bg-color); }
-        .article-card { /* Reuse product card style */ }
 
         /* === FAQ Section === */
         .faq-container { max-width: 800px; margin: 0 auto; }
@@ -272,7 +337,11 @@
 </head>
 <body>
 
-    <!-- ========== HEADER ========== -->
+    <!-- WhatsApp Floating Button -->
+    <a href="https://api.whatsapp.com/send?phone=6281231373839&text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20pakan%20ternak." target="_blank" id="wa-float" style="position:fixed;bottom:24px;left:24px;z-index:9999;background:#25D366;color:#fff;border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(44,62,80,0.18);font-size:2.2rem;transition:background 0.2s;">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <style>#wa-float:hover{background:#128C7E;}</style>
     <header class="header" id="header">
         <div class="container">
             <nav class="navbar">
@@ -325,7 +394,7 @@
                     <div class="feature-card fade-in">
                         <div class="icon"><i class="fas fa-hand-holding-dollar"></i></div>
                         <h3>Harga Kompetitif</h3>
-                        <p>Dapatkan penawaran harga terbaik untuk menekan biaya operasional tanpa mengurangi kualitas.</p>
+                        <p>Dapatkan Pemesanan harga terbaik untuk menekan biaya operasional tanpa mengurangi kualitas.</p>
                     </div>
                     <div class="feature-card fade-in">
                         <div class="icon"><i class="fas fa-truck-fast"></i></div>
@@ -361,41 +430,96 @@
         <!-- ========== PRODUK SECTION ========== -->
         <section class="section" id="produk">
             <div class="container">
+                <!-- Banner Promo Animasi + Countdown -->
+                <div id="promo-banner" class="fade-in" style="background:linear-gradient(90deg,#FF9800 60%,#cec81d 100%);color:#fff;padding:18px 32px;border-radius:16px;box-shadow:0 2px 16px rgba(0,0,0,0.08);font-size:1.25rem;font-weight:600;text-align:center;margin-bottom:32px;position:relative;overflow:hidden;">
+                    <span style="animation: pulsePromo 1.2s infinite alternate;display:inline-block;margin-right:12px;"><i class="fas fa-bolt"></i></span>
+                    Promo Juli: Diskon 10% untuk pembelian pertama & konsultasi gratis! <br>
+                    <span id="promo-countdown" style="background:#fff2e0;color:#E65100;padding:4px 16px;border-radius:24px;margin-left:16px;font-weight:700;font-size:1.1rem;"></span>
+                    <br><a href="#form-Pemesanan" style="color:#fff;text-decoration:underline;font-weight:700;margin-left:16px;">Klaim Sekarang</a>
+                </div>
+                <style>
+                @keyframes pulsePromo { 0%{transform:scale(1);} 100%{transform:scale(1.15);} }
+                #promo-banner a:hover { color: #212121; background: #fff2e0; border-radius: 8px; padding: 2px 8px; }
+                </style>
+        <!-- Kalkulator Pakan Sederhana -->
+        <section class="section" id="kalkulator-pakan" style="background:#fffbe6;">
+            <div class="container fade-in" style="max-width:600px;text-align:center;">
+                <h2 style="color:#E65100;">Kalkulator Kebutuhan Pakan</h2>
+                <p>Hitung kebutuhan pakan harian untuk ternak Anda.</p>
+                <form id="form-kalkulator" style="margin:24px 0;">
+                    <input type="number" id="jumlahTernak" min="1" placeholder="Jumlah Ternak" style="padding:10px 18px;border-radius:8px;border:1px solid #E0E0E0;font-size:1rem;width:60%;margin-bottom:12px;">
+                    <select id="jenisTernak" style="padding:10px 18px;border-radius:8px;border:1px solid #E0E0E0;font-size:1rem;width:60%;margin-bottom:12px;">
+                        <option value="sapi">Sapi</option>
+                        <option value="ayam">Ayam</option>
+                        <option value="kambing">Kambing</option>
+                        <option value="ikan">Ikan</option>
+                    </select><br>
+                    <button type="submit" class="btn btn-secondary">Hitung</button>
+                </form>
+                <div id="hasilKalkulator" style="font-size:1.1rem;font-weight:600;color:#2E7D32;"></div>
+            </div>
+        </section>
+        <!-- Galeri Foto Hasil Pelanggan -->
+        <section class="section" id="galeri-pelanggan" style="background:#F8F9FA;">
+            <div class="container fade-in">
+                <div class="section-heading">
+                    <h2>Galeri Hasil Ternak Pelanggan</h2>
+                    <p>Foto-foto hasil panen dan ternak dari pelanggan kami.</p>
+                </div>
+                <div style="display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;">
+                    <img src="https://ksdae.menlhk.go.id/assets/news/sapi_berkembang_biak2.jpg" alt="Sapi" style="height:160px;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);">
+                    <img src="https://cdn.rri.co.id/berita/Palangkaraya/o/1718611870351-WhatsApp_Image_2024-06-17_at_15.10.47/2dhh60efg9dzq6k.jpeg" alt="Ayam" style="height:160px;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);">
+                    <img src="https://desamlati.id/wp-content/uploads/2022/06/kambing-3-1-1024x766.jpg" alt="Kambing" style="height:160px;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);">
+                    <img src="https://dkpp.bulelengkab.go.id/uploads/konten/cara-mudah-budidaya-ikan-mas-dalam-keramba-16.jpg" alt="Ikan" style="height:160px;border-radius:12px;box-shadow:0 2px 8px rgba(44,62,80,0.08);">
+                </div>
+            </div>
+        </section>
                 <div class="section-heading fade-in">
                     <h2>Produk Unggulan Kami</h2>
                     <p>Dari konsentrat hingga bahan baku pakan alternatif, kami memiliki semua yang Anda butuhkan.</p>
                 </div>
                 <div class="product-grid">
-                    <!-- Ganti gambar dan teks sesuai produk Anda -->
-                    <div class="product-card fade-in" >
+                    <!-- Produk 1 -->
+                    <div class="product-card fade-in">
+                        <span class="product-badge">Best Seller</span>
                         <img src="https://image.indonetwork.co.id/f-webp/products/thumbs/350x350/2019/02/21/890d1603-c663-4e7a-acde-00b786c16de8.jpg" alt="Konsentrat Sapi">
                         <div class="product-content">
                             <div class="product-category">Pakan Sapi & Kambing</div>
                             <h3>Konsentrat Penggemukan</h3>
+                            <div class="product-desc">Meningkatkan pertumbuhan dan efisiensi pakan, cocok untuk penggemukan sapi dan kambing.</div>
                             <a href="https://api.whatsapp.com/send?phone=6281231373839&text=Halo%2C%20saya%20tertarik%20dengan%20Konsentrat%20Penggemukan." target="_blank" class="btn btn-primary">Tanya via WhatsApp</a>
                         </div>
                     </div>
-                    <div  class="product-card fade-in">
+                    <!-- Produk 2 -->
+                    <div class="product-card fade-in">
+                        <span class="product-badge">Diskon 10%</span>
                         <img src="https://image.indonetwork.co.id/f-webp/products/thumbs/350x350/2019/02/21/c7f608b1-700f-4067-8b66-f7c0851a93ae.jpg" alt="Tepung Jagung">
                         <div class="product-content">
                             <div class="product-category">Bahan Baku Pakan</div>
                             <h3>Tepung Jagung Kualitas Super</h3>
+                            <div class="product-desc">Tepung jagung berkualitas tinggi, sumber energi utama untuk berbagai jenis ternak.</div>
                             <a href="https://api.whatsapp.com/send?phone=6281231373839&text=Halo%2C%20saya%20tertarik%20dengan%20Tepung%20Jagung." target="_blank" class="btn btn-primary">Tanya via WhatsApp</a>
                         </div>
                     </div>
+                    <!-- Produk 3 -->
                     <div class="product-card fade-in">
+                        <span class="product-badge">Favorit Peternak</span>
                         <img src="https://image.indonetwork.co.id/f-webp/products/thumbs/350x350/2018/12/12/6e35aaa0-7926-4452-befe-461b3b447ed2.jpg" alt="Pakan Alternatif">
                         <div class="product-content">
                             <div class="product-category">Pakan Alternatif</div>
                             <h3>Pakan Ayam & Bebek</h3>
+                            <div class="product-desc">Formulasi khusus untuk ayam dan bebek, meningkatkan produksi dan kesehatan ternak.</div>
                             <a href="https://api.whatsapp.com/send?phone=6281231373839&text=Halo%2C%20saya%20tertarik%20dengan%20Pakan%20Ayam%20%26%20Bebek." target="_blank" class="btn btn-primary">Tanya via WhatsApp</a>
                         </div>
                     </div>
+                    <!-- Produk 4 -->
                     <div class="product-card fade-in">
+                        <span class="product-badge">Premium</span>
                         <img src="https://image.indonetwork.co.id/f-webp/products/thumbs/350x350/2018/02/21/d192fa36be0e193e219e269a33bab94f.jpg" alt="Bungkil Kedelai">
                         <div class="product-content">
                             <div class="product-category">Bahan Baku Pakan</div>
                             <h3>Bungkil Kedelai (SBM)</h3>
+                            <div class="product-desc">Sumber protein nabati terbaik untuk pakan ternak, cocok untuk campuran pakan unggas dan ruminansia.</div>
                             <a href="https://api.whatsapp.com/send?phone=6281231373839&text=Halo%2C%20saya%20tertarik%20dengan%20Bungkil%20Kedelai%20(SBM)." target="_blank" class="btn btn-primary">Tanya via WhatsApp</a>
                         </div>
                     </div>
@@ -471,6 +595,18 @@
                                 <div class="author-title">Peternak Kambing, Serang</div>
                             </div>
                         </div>
+                        <!-- Slide 4: Video Testimoni -->
+                        <!-- <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <video controls width="220" style="border-radius:10%;margin:0 auto 1rem;box-shadow:0 2px 8px rgba(44,62,80,0.13);">
+                                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                                    Testimoni video tidak didukung browser Anda.
+                                </video>
+                                <p>"Layanan konsultasi gratis sangat membantu saya memilih pakan yang tepat. Terima kasih!"</p>
+                                <div class="author-name">Budi Santoso</div>
+                                <div class="author-title">Peternak Ikan, Sidoarjo</div>
+                            </div>
+                        </div> -->
                     </div>
                     <!-- Navigation Buttons -->
                     <div class="swiper-button-next"></div>
@@ -510,7 +646,7 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="faq-answer">
-                            <p>Minimum pemesanan bervariasi tergantung pada produk dan lokasi pengiriman. Silakan hubungi tim kami melalui WhatsApp untuk mendapatkan informasi yang akurat dan penawaran terbaik untuk Anda.</p>
+                            <p>Minimum pemesanan bervariasi tergantung pada produk dan lokasi pengiriman. Silakan hubungi tim kami melalui WhatsApp untuk mendapatkan informasi yang akurat dan Pemesanan terbaik untuk Anda.</p>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -534,8 +670,37 @@
                 </div>
             </div>
         </section>
+        <!-- ========== MAP SECTION ========== -->
+        <section class="section" id="lokasi" style="padding-bottom:0;">
+            <div class="container fade-in" style="text-align:center;">
+                <h2 style="margin-bottom:1rem;">Lokasi PT Cipta Prima Nutrisi</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2157.7833036216807!2d112.74614753624458!3d-7.309789029353832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4e75366bea28fc83%3A0x5655228d3d60932a!2sPT%20CIPTA%20PRIMA%20NUTRISI!5e0!3m2!1sid!2sid!4v1753083214132!5m2!1sid!2sid" width="100%" height="450" style="border:0; border-radius:12px; box-shadow:0 2px 16px rgba(0,0,0,0.08);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section><br><br><br><br>
 
         <!-- ========== CALL TO ACTION (CTA) SECTION ========== -->
+        <!-- Formulir Request Pemesanan -->
+        <section class="section" id="form-Pemesanan" style="background:#fffbe6;">
+            <div class="container fade-in" style="max-width:600px;">
+                <div class="section-heading">
+                    <h2>Request Pemesanan</h2>
+                    <p>Dapatkan Pemesanan terbaik sesuai kebutuhan Anda.</p>
+                </div>
+                <form id="PemesananForm" style="display:flex;flex-direction:column;gap:16px;">
+                    <input type="text" id="namaPemesan" placeholder="Nama Anda" required style="padding:10px 18px;border-radius:8px;border:1px solid #E0E0E0;font-size:1rem;">
+                    <input type="text" id="kontakPemesan" placeholder="Nomor WhatsApp" required style="padding:10px 18px;border-radius:8px;border:1px solid #E0E0E0;font-size:1rem;">
+                    <select id="produkPemesan" style="padding:10px 18px;border-radius:8px;border:1px solid #E0E0E0;font-size:1rem;">
+                        <option value="Konsentrat Penggemukan">Konsentrat Penggemukan</option>
+                        <option value="Tepung Jagung">Tepung Jagung</option>
+                        <option value="Pakan Ayam & Bebek">Pakan Ayam & Bebek</option>
+                        <option value="Bungkil Kedelai (SBM)">Bungkil Kedelai (SBM)</option>
+                    </select>
+                    <input type="number" id="jumlahPesan" min="1" placeholder="Jumlah (kg)" required style="padding:10px 18px;border-radius:8px;border:1px solid #E0E0E0;font-size:1rem;">
+                    <button type="submit" class="btn btn-primary">Request Pemesanan</button>
+                </form>
+                <div id="hasilPemesanan" style="font-size:1.1rem;font-weight:600;color:#2E7D32;margin-top:12px;"></div>
+            </div>
+        </section>
         <section class="section cta-section">
             <div class="container fade-in">
                 <h2>Siap Meningkatkan Hasil Ternak Anda?</h2>
@@ -593,12 +758,10 @@
     <!-- ========== JAVASCRIPT UTAMA ========== -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
             // --- 1. Navigasi Header & Hamburger Menu ---
             const header = document.getElementById('header');
             const hamburger = document.getElementById('hamburger');
             const navLinks = document.getElementById('nav-links');
-
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
                     header.classList.add('scrolled');
@@ -606,19 +769,16 @@
                     header.classList.remove('scrolled');
                 }
             });
-
             hamburger.addEventListener('click', () => {
                 hamburger.classList.toggle('active');
                 navLinks.classList.toggle('active');
             });
-            
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     hamburger.classList.remove('active');
                     navLinks.classList.remove('active');
                 });
             });
-
             // --- 2. Animasi Scroll (Fade In) ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -627,11 +787,9 @@
                     }
                 });
             }, { threshold: 0.1 });
-
             document.querySelectorAll('.fade-in').forEach(el => {
                 observer.observe(el);
             });
-
             // --- 3. Inisialisasi Slider Testimoni (SwiperJS) ---
             const swiper = new Swiper('.testimonial-slider', {
                 loop: true,
@@ -651,17 +809,15 @@
                     1024: { slidesPerView: 2, spaceBetween: 30 },
                 }
             });
-
             // --- 4. Hero Background Slider ---
             const heroSection = document.getElementById('hero');
             const heroImages = [
-                'https://www.cdmione.com/wp-content/uploads/2018/06/pakan-ternak.jpg',
-                'https://dynatech-int.com/wp-content/uploads/images/feedstuff.jpg',
-                'https://arboge.com/wp-content/uploads/2018/12/Bahan-Baku-Pakan.jpg',
-                'https://static.chickin.id/blog/wp-content/uploads/2022/08/jenis-pakan-bernutrisi-tinggi-untuk-ayam-pegaging.webp'
+                'https://st3.depositphotos.com/2146559/19063/i/450/depositphotos_190632278-stock-photo-jowar-grain-sorghum-growing-farm.jpg',
+                'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDGCsHgV9OoD9FDl0ZMgRXWMyt3kA2QY__3p3sQ6Uz9LvbfCi-wlU9kYC2vGFP3_XYF1E7lkGZmbuO2OVAv5DRrp8w3LBT5wxUZlUVQELm5-ZwP4w8x0Ld8OBasCl7lEItvK5MGQ7rD-dEc_uH7wp0CK78_TW0EiNM42KgdXaJ6vR54F4R5rDwlSzS/s16000/jagung.jpg',
+                'https://garamindustri.com/wp-content/uploads/2019/03/pakan-ternak-garam.jpg',
+                'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7uwStJ0Y8YszHPVCcSVn8YQOi_Oz4XNrtIwtUVWYcMq3BIFi292Kdp8xBQW0SLh05CZRnwUOTCCUo71fvrsXK37GFEetgitbrFJGiRfANewByIrZyi2KSilv1r69SLVAqTx5sIW5RBQFBmb04d1lVhG5mvDmyXIZP9QgLyaasglJcsrT1WJd8VHy5piw/s1536/ChatGPT%20Image%20Jul%203,%202025,%2011_26_14%20AM.png'
             ];
             let currentImageIndex = 0;
-
             function changeBackgroundImage() {
                 currentImageIndex = (currentImageIndex + 1) % heroImages.length;
                 heroSection.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
@@ -670,8 +826,6 @@
             heroSection.style.backgroundImage = `url('${heroImages[0]}')`;
             // Change image every 5 seconds
             setInterval(changeBackgroundImage, 5000);
-
-
             // --- 5. FAQ Accordion ---
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
@@ -679,13 +833,11 @@
                 question.addEventListener('click', () => {
                     const answer = item.querySelector('.faq-answer');
                     const isOpen = item.classList.contains('active');
-
                     // Tutup semua item lain
                     faqItems.forEach(otherItem => {
                         otherItem.classList.remove('active');
                         otherItem.querySelector('.faq-answer').style.maxHeight = null;
                     });
-                    
                     // Buka/tutup item yang diklik
                     if (!isOpen) {
                         item.classList.add('active');
@@ -693,6 +845,81 @@
                     }
                 });
             });
+            // --- 6. Pop-up Konsultasi Gratis ---
+            function showConsultPopup() {
+                if (document.getElementById('consult-popup')) return;
+                const popup = document.createElement('div');
+                popup.id = 'consult-popup';
+                popup.innerHTML = `
+                    <div style="position:fixed;bottom:32px;right:32px;z-index:9999;background:#fff;border-radius:18px;box-shadow:0 4px 32px rgba(44,62,80,0.18);padding:32px 28px 24px 28px;max-width:340px;text-align:center;animation:fadeInPop .7s;">
+                        <div style="font-size:2.2rem;color:#2E7D32;margin-bottom:12px;"><i class='fab fa-whatsapp'></i></div>
+                        <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">Konsultasi Gratis!</div>
+                        <div style="font-size:1rem;color:#424242;margin-bottom:18px;">Tim ahli kami siap membantu Anda memilih pakan terbaik untuk ternak Anda.</div>
+                        <a href='https://api.whatsapp.com/send?phone=6281231373839&text=Halo%2C%20saya%20ingin%20konsultasi%20gratis%20pakan%20ternak.' target='_blank' style='display:inline-block;background:#2E7D32;color:#fff;padding:12px 28px;border-radius:50px;font-weight:600;text-decoration:none;font-size:1.1rem;box-shadow:0 2px 8px rgba(44,62,80,0.08);margin-bottom:8px;'>Chat WhatsApp</a><br>
+                        <button id='close-consult-popup' style='margin-top:10px;background:none;border:none;color:#E65100;font-size:1.1rem;cursor:pointer;'>Tutup</button>
+                    </div>
+                    <style>@keyframes fadeInPop{from{opacity:0;transform:scale(0.8);}to{opacity:1;transform:scale(1);}}</style>
+                `;
+                document.body.appendChild(popup);
+                document.getElementById('close-consult-popup').onclick = () => popup.remove();
+            }
+            let popupShown = false;
+            window.addEventListener('scroll', () => {
+                if (!popupShown && window.scrollY > 400) {
+                    showConsultPopup();
+                    popupShown = true;
+                }
+            });
+            // --- 7. Countdown Promo ---
+            function updateCountdown() {
+                const endDate = new Date('2025-07-31T23:59:59');
+                const now = new Date();
+                const diff = endDate - now;
+                if (diff > 0) {
+                    const days = Math.floor(diff / (1000*60*60*24));
+                    const hours = Math.floor((diff/(1000*60*60))%24);
+                    const mins = Math.floor((diff/(1000*60))%60);
+                    const secs = Math.floor((diff/1000)%60);
+                    document.getElementById('promo-countdown').textContent = `Berakhir dalam ${days}h ${hours}j ${mins}m ${secs}d`;
+                } else {
+                    document.getElementById('promo-countdown').textContent = 'Promo telah berakhir';
+                }
+            }
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+            // --- 8. Kalkulator Pakan ---
+            document.getElementById('form-kalkulator').onsubmit = function(e){
+                e.preventDefault();
+                const jumlah = parseInt(document.getElementById('jumlahTernak').value);
+                const jenis = document.getElementById('jenisTernak').value;
+                let hasil = '';
+                if (!jumlah || jumlah < 1) {
+                    hasil = 'Masukkan jumlah ternak yang valid.';
+                } else {
+                    let kebutuhan = 0;
+                    if (jenis==='sapi') kebutuhan = jumlah*25;
+                    else if (jenis==='ayam') kebutuhan = jumlah*0.12;
+                    else if (jenis==='kambing') kebutuhan = jumlah*3;
+                    else if (jenis==='ikan') kebutuhan = jumlah*0.05;
+                    hasil = `Kebutuhan pakan harian: <span style='color:#E65100;'>${kebutuhan.toLocaleString()} kg</span>`;
+                }
+                document.getElementById('hasilKalkulator').innerHTML = hasil;
+            };
+            // --- 9. Formulir Request Pemesanan ---
+            document.getElementById('PemesananForm').onsubmit = function(e){
+                e.preventDefault();
+                const nama = document.getElementById('namaPemesan').value;
+                const kontak = document.getElementById('kontakPemesan').value;
+                const produk = document.getElementById('produkPemesan').value;
+                const jumlah = document.getElementById('jumlahPesan').value;
+                // Format pesan WhatsApp
+                let pesanWA = `Halo, saya ingin melakukan pemesanan.\n\nNama: ${nama}\nNo. WhatsApp: ${kontak}\nProduk: ${produk}\nJumlah: ${jumlah} kg`;
+                // Encode pesan untuk URL
+                let url = `https://api.whatsapp.com/send?phone=6281231373839&text=${encodeURIComponent(pesanWA)}`;
+                window.open(url, '_blank');
+                document.getElementById('hasilPemesanan').textContent = '';
+                // ...existing code...
+            };
         });
     </script>
 
